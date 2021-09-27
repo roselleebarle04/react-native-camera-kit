@@ -79,7 +79,7 @@ class BarcodeFrame(context: Context) : View(context) {
 
     fun setFrameColor(@ColorInt borderColor: Int) {
         borderPaint.color = borderColor
-        laserPaint.setShadowLayer(12.toFloat(), 0.toFloat(), 0.toFloat(), borderColor);
+        laserPaint.setShadowLayer(30f, 0f, 0f, Color.YELLOW);
     }
 
     fun setLaserColor(@ColorInt laserColor: Int) {
