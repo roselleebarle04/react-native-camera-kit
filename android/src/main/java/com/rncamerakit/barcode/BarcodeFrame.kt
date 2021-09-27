@@ -43,7 +43,7 @@ class BarcodeFrame(context: Context) : View(context) {
         frameRect.left = marginWidth
         frameRect.right = width - marginWidth
         frameRect.top = marginHeight
-        frameRect.bottom = height - marginHeight
+        frameRect.bottom = width + marginWidth + marginWidth
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -79,6 +79,7 @@ class BarcodeFrame(context: Context) : View(context) {
 
     fun setFrameColor(@ColorInt borderColor: Int) {
         borderPaint.color = borderColor
+        laserPaint.setShadowLayer(12.toFloat(), 0.toFloat(), 0.toFloat(), borderColor);
     }
 
     fun setLaserColor(@ColorInt laserColor: Int) {
