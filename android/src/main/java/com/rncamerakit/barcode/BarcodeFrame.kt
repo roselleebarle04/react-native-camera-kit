@@ -79,7 +79,7 @@ class BarcodeFrame(context: Context) : View(context) {
 
     fun setFrameColor(@ColorInt borderColor: Int) {
         borderPaint.color = borderColor
-        laserPaint.setShadowLayer(30f, 0f, 0f, Color.YELLOW);
+        laserPaint.setShadowLayer(30f, 0f, 0f, Color.CYAN);
     }
 
     fun setLaserColor(@ColorInt laserColor: Int) {
@@ -90,7 +90,7 @@ class BarcodeFrame(context: Context) : View(context) {
         private const val MAIN_BORDER_STROKE_WIDTH = 2.5
         private const val LASER_STROKE_WIDTH = 2.5
         private const val STROKE_WIDTH = 12
-        private const val ANIMATION_SPEED = 8
+        private const val ANIMATION_SPEED = 4
         private const val WIDTH_SCALE = 7
         private const val HEIGHT_SCALE = 2.75
     }
