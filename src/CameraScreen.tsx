@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import Camera from './Camera';
-import {palette} from "../theme/palette";
+import {palette} from './palette';
 
 const FLASH_MODE_AUTO = 'auto';
 const FLASH_MODE_ON = 'on';
@@ -360,7 +360,7 @@ export default class CameraScreen extends Component<Props, State> {
         <TouchableOpacity style={{ paddingHorizontal: 25, backgroundColor: palette.blue, borderTopLeftRadius: 50, borderBottomLeftRadius: 50, }} onPress={() => this.props.onGallery()}>
           <Image
               style={{ flex: 1, justifyContent: 'center', width: 25, height: 25 }}
-              source={require('../assets/image.png')}
+              source={require('./assets/image.png')}
               resizeMode="contain"
           />
         </TouchableOpacity>
@@ -374,7 +374,7 @@ export default class CameraScreen extends Component<Props, State> {
         <TouchableOpacity style={{ paddingHorizontal: 25, backgroundColor: palette.blue, borderTopRightRadius: 50, borderBottomRightRadius: 50, }} onPress={() => this.props.onHistory()}>
           <Image
               style={{ flex: 1, justifyContent: 'center', width: 25, height: 25 }}
-              source={require('../assets/history_tab_active.png')}
+              source={require('./assets/history_tab_active.png')}
               resizeMode="contain"
           />
         </TouchableOpacity>
