@@ -4,12 +4,14 @@ import android.content.Context
 import android.graphics.*
 import android.view.View
 import androidx.annotation.ColorInt
+import android.graphics.Color
 
 import com.rncamerakit.R
 
 class BarcodeFrame(context: Context) : View(context) {
     private var borderPaint: Paint = Paint()
     private var laserPaint: Paint = Paint()
+    private var shadowPaint: Paint = Paint()
     var frameRect: Rect = Rect()
 
     private var frameWidth = 0
@@ -18,12 +20,22 @@ class BarcodeFrame(context: Context) : View(context) {
     private var previousFrameTime = System.currentTimeMillis()
     private var laserY = 0
 
+    private var shadowColor = Color.Black;
+    private var offsetX = -25;
+    private var offsetY = 30;
+    private var blurRadius = 5;
+
     private fun init(context: Context) {
         borderPaint = Paint()
         borderPaint.style = Paint.Style.STROKE
         borderPaint.strokeWidth = STROKE_WIDTH.toFloat()
         laserPaint.style = Paint.Style.STROKE
         laserPaint.strokeWidth = STROKE_WIDTH.toFloat()
+        shadowPaint.setColor(shadowColor);
+        shadowPaint.setMaskFilter(new BlurMaskFilter(
+                    blurRadius /* shadowRadius */,
+                    BlurMaskFilter.Blur.NORMAL));
+
         borderMargin = context.resources.getDimensionPixelSize(R.dimen.border_length)
     }
 
@@ -61,6 +73,7 @@ class BarcodeFrame(context: Context) : View(context) {
 
     private fun drawLaser(canvas: Canvas, timeElapsed: Long) {
         if (laserY > frameRect.bottom || laserY < frameRect.top) laserY = frameRect.top
+        canvas.drawLine((frameRect.left + STROKE_WIDTH).toFloat(), laserY.toFloat(), (frameRect.right - STROKE_WIDTH).toFloat(), laserY.toFloat(), shadowPaint)
         canvas.drawLine((frameRect.left + STROKE_WIDTH).toFloat(), laserY.toFloat(), (frameRect.right - STROKE_WIDTH).toFloat(), laserY.toFloat(), laserPaint)
         laserY += (timeElapsed / ANIMATION_SPEED).toInt()
     }
@@ -74,7 +87,7 @@ class BarcodeFrame(context: Context) : View(context) {
     }
 
     companion object {
-        private const val STROKE_WIDTH = 8
+        private const val STROKE_WIDTH = 10
         private const val ANIMATION_SPEED = 8
         private const val WIDTH_SCALE = 7
         private const val HEIGHT_SCALE = 5.5
