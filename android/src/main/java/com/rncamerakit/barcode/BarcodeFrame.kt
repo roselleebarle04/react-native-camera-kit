@@ -77,7 +77,7 @@ class BarcodeFrame(context: Context) : View(context) {
         private const val STROKE_WIDTH = 8
         private const val ANIMATION_SPEED = 8
         private const val WIDTH_SCALE = 7
-        private const val HEIGHT_SCALE = 2.75
+        private const val HEIGHT_SCALE = 5.5
     }
 
     init {
