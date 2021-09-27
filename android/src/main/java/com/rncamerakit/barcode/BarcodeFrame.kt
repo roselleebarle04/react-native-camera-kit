@@ -25,12 +25,14 @@ class BarcodeFrame(context: Context) : View(context) {
         borderPaint.strokeWidth = STROKE_WIDTH.toFloat()
 
         mainBorderPaint = Paint()
-        mainBorderPaint.color = Color.WHITE
+        mainBorderPaint.color = Color.LTGRAY
         mainBorderPaint.style = Paint.Style.STROKE
         mainBorderPaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
 
         laserPaint.style = Paint.Style.STROKE
+        laserPaint.color = Color.LTGRAY
         laserPaint.strokeWidth = LASER_STROKE_WIDTH.toFloat()
+        laserPaint.setStrokeCap(Paint.Cap.ROUND);
         borderMargin = context.resources.getDimensionPixelSize(R.dimen.border_length)
     }
 
@@ -79,11 +81,11 @@ class BarcodeFrame(context: Context) : View(context) {
 
     fun setFrameColor(@ColorInt borderColor: Int) {
         borderPaint.color = borderColor
-        laserPaint.setShadowLayer(30f, 0f, 0f, Color.CYAN);
+        laserPaint.setShadowLayer(30f, 0f, 0f, borderColor);
     }
 
     fun setLaserColor(@ColorInt laserColor: Int) {
-        laserPaint.color = laserColor
+        //laserPaint.color = laserColor
     }
 
     companion object {
