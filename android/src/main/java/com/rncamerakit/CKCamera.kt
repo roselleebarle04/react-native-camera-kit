@@ -254,7 +254,11 @@ class CKCamera(context: ThemedReactContext) : FrameLayout(context), LifecycleObs
      *  @return suitable aspect ratio
      */
     private fun aspectRatio(width: Int, height: Int): Int {
-        return AspectRatio.RATIO_1_1_VALUE
+        val previewRatio = max(width, height).toDouble() / min(width, height)
+        if (abs(previewRatio - RATIO_4_3_VALUE) <= abs(previewRatio - RATIO_16_9_VALUE)) {
+            return AspectRatio.RATIO_4_3
+        }
+        return AspectRatio.RATIO_16_9
     }
 
     private fun flashViewFinder() {
@@ -511,7 +515,6 @@ class CKCamera(context: ThemedReactContext) : FrameLayout(context), LifecycleObs
     companion object {
 
         private const val TAG = "CameraKit"
-        private const val RATIO_1_1_VALUE = 1.0 / 1.0
         private const val RATIO_4_3_VALUE = 4.0 / 3.0
         private const val RATIO_16_9_VALUE = 16.0 / 9.0
     }
