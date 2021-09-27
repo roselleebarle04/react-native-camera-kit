@@ -36,11 +36,11 @@ class BarcodeFrame(context: Context) : View(context) {
 
         centerFrameBorderPaint = Paint()
         centerFrameBorderPaint.color = Color.LTGRAY
-        centerFramePaint.style = Paint.Style.STROKE
-        centerFramePaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
+        centerFrameBorderPaint.style = Paint.Style.STROKE
+        centerFrameBorderPaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
 
         outsideFramePaint = Paint()
-        outsideFramePaint.color = Color.argb(0.2f,0f,0f,0f)
+        outsideFramePaint.color = Color.argb(0.3f,0f,0f,0f)
         outsideFramePaint.style = Paint.Style.FILL
         outsideFramePaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
 
@@ -86,10 +86,6 @@ class BarcodeFrame(context: Context) : View(context) {
     private fun drawSquare(canvas: Canvas) {
         canvas.drawRect(outsideFrameRect, outsideFramePaint)
         canvas.drawRect(centerFrameRect, centerFramePaint)
-        canvas.drawLine(frameRect.left.toFloat(), frameRect.top.toFloat(), frameRect.left.toFloat(), frameRect.bottom.toFloat(), centerFrameBorderPaint)
-        canvas.drawLine(frameRect.right.toFloat(), frameRect.top.toFloat(), frameRect.right.toFloat(), frameRect.bottom.toFloat(), centerFrameBorderPaint)
-        canvas.drawLine(frameRect.right.toFloat(), frameRect.top.toFloat(), frameRect.left.toFloat(), frameRect.top.toFloat(), centerFrameBorderPaint)
-        canvas.drawLine(frameRect.left.toFloat(), frameRect.bottom.toFloat(), frameRect.right.toFloat(), frameRect.bottom.toFloat(), centerFrameBorderPaint)
     }
 
     private fun drawBorder(canvas: Canvas) {
