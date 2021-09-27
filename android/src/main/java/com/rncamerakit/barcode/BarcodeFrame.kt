@@ -8,10 +8,14 @@ import androidx.annotation.ColorInt
 import com.rncamerakit.R
 
 class BarcodeFrame(context: Context) : View(context) {
-    private var mainBorderPaint: Paint = Paint()
+    private var outsideFramePaint: Paint = Paint()
+    private var centerFrameBorderPaint: Paint = Paint()
+    private var centerFramePaint: Paint = Paint()
     private var borderPaint: Paint = Paint()
     private var laserPaint: Paint = Paint()
     var frameRect: Rect = Rect()
+    var centerFrameRect: Rect = Rect()
+    var outsideFrameRect: Rect = Rect()
 
     private var frameWidth = 0
     private var frameHeight = 0
@@ -24,15 +28,26 @@ class BarcodeFrame(context: Context) : View(context) {
         borderPaint.style = Paint.Style.STROKE
         borderPaint.strokeWidth = STROKE_WIDTH.toFloat()
 
-        mainBorderPaint = Paint()
-        mainBorderPaint.color = Color.LTGRAY
-        mainBorderPaint.style = Paint.Style.STROKE
-        mainBorderPaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
+        centerFramePaint = Paint()
+        centerFramePaint.color = Color.TRANSPARENT
+        centerFramePaint.style = Paint.Style.FILL
+        centerFramePaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
+        centerFramePaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
+        centerFrameBorderPaint = Paint()
+        centerFrameBorderPaint.color = Color.LTGRAY
+        centerFramePaint.style = Paint.Style.STROKE
+        centerFramePaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
+
+        outsideFramePaint = Paint()
+        outsideFramePaint.color = Color.argb(0.2f,0f,0f,0f)
+        outsideFramePaint.style = Paint.Style.FILL
+        outsideFramePaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
+
+        //todo add shader https://medium.com/@yuriyskul/different-ways-to-create-glowing-shapes-in-android-canvas-8b73010411fe
         laserPaint.style = Paint.Style.STROKE
         laserPaint.color = Color.LTGRAY
         laserPaint.strokeWidth = LASER_STROKE_WIDTH.toFloat()
-        laserPaint.setStrokeCap(Paint.Cap.ROUND);
         borderMargin = context.resources.getDimensionPixelSize(R.dimen.border_length)
     }
 
@@ -46,23 +61,38 @@ class BarcodeFrame(context: Context) : View(context) {
         frameRect.right = width - marginWidth
         frameRect.top = marginHeight
         frameRect.bottom = width + marginWidth + marginWidth
+
+        centerFrameRect.left = marginWidth
+        centerFrameRect.right = width - marginWidth
+        centerFrameRect.top = marginHeight
+        centerFrameRect.bottom = width + marginWidth + marginWidth
+
+        outsideFrameRect.left = 0
+        outsideFrameRect.right = frameWidth
+        outsideFrameRect.top = 0
+        outsideFrameRect.bottom = frameHeight
     }
 
     override fun onDraw(canvas: Canvas) {
         val timeElapsed = System.currentTimeMillis() - previousFrameTime
         super.onDraw(canvas)
+        drawSquare(canvas)
         drawBorder(canvas)
         drawLaser(canvas, timeElapsed)
         previousFrameTime = System.currentTimeMillis()
         this.invalidate(frameRect)
     }
 
-    private fun drawBorder(canvas: Canvas) {
-        canvas.drawLine(frameRect.left.toFloat(), frameRect.top.toFloat(), frameRect.left.toFloat(), frameRect.bottom.toFloat(), mainBorderPaint)
-        canvas.drawLine(frameRect.right.toFloat(), frameRect.top.toFloat(), frameRect.right.toFloat(), frameRect.bottom.toFloat(), mainBorderPaint)
-        canvas.drawLine(frameRect.right.toFloat(), frameRect.top.toFloat(), frameRect.left.toFloat(), frameRect.top.toFloat(), mainBorderPaint)
-        canvas.drawLine(frameRect.left.toFloat(), frameRect.bottom.toFloat(), frameRect.right.toFloat(), frameRect.bottom.toFloat(), mainBorderPaint)
+    private fun drawSquare(canvas: Canvas) {
+        canvas.drawRect(outsideFrameRect, outsideFramePaint)
+        canvas.drawRect(centerFrameRect, centerFramePaint)
+        canvas.drawLine(frameRect.left.toFloat(), frameRect.top.toFloat(), frameRect.left.toFloat(), frameRect.bottom.toFloat(), centerFrameBorderPaint)
+        canvas.drawLine(frameRect.right.toFloat(), frameRect.top.toFloat(), frameRect.right.toFloat(), frameRect.bottom.toFloat(), centerFrameBorderPaint)
+        canvas.drawLine(frameRect.right.toFloat(), frameRect.top.toFloat(), frameRect.left.toFloat(), frameRect.top.toFloat(), centerFrameBorderPaint)
+        canvas.drawLine(frameRect.left.toFloat(), frameRect.bottom.toFloat(), frameRect.right.toFloat(), frameRect.bottom.toFloat(), centerFrameBorderPaint)
+    }
 
+    private fun drawBorder(canvas: Canvas) {
         canvas.drawLine(frameRect.left.toFloat(), frameRect.top.toFloat(), frameRect.left.toFloat(), (frameRect.top + borderMargin).toFloat(), borderPaint)
         canvas.drawLine(frameRect.left.toFloat(), frameRect.top.toFloat(), (frameRect.left + borderMargin).toFloat(), frameRect.top.toFloat(), borderPaint)
         canvas.drawLine(frameRect.left.toFloat(), frameRect.bottom.toFloat(), frameRect.left.toFloat(), (frameRect.bottom - borderMargin).toFloat(), borderPaint)
