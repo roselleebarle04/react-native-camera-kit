@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import Camera from './Camera';
+import {palette} from "../theme/palette";
 
 const FLASH_MODE_AUTO = 'auto';
 const FLASH_MODE_ON = 'on';
@@ -28,9 +29,12 @@ export type Props = {
   ratioOverlay?: string,
   ratioOverlayColor?: string,
   allowCaptureRetake: boolean,
-  cameraRatioOverlay: any,
+  flashImages: any,
+  cameraRatioOverlay?: any,
   showCapturedImageCount?: boolean,
-  captureButtonImage: any,
+  zoomMode?: boolean,
+  focusMode?: boolean,
+  captureButtonImage?: any,
   cameraFlipImage: any,
   hideControls: any,
   showFrame: any,
@@ -39,8 +43,10 @@ export type Props = {
   frameColor: any,
   torchOnImage: any,
   torchOffImage: any,
+  onHistory: (any) => void;
   onReadCode: (any) => void;
-  onBottomButtonPressed: (any) => void;
+  onBottomButtonPressed?: (any) => void;
+  onGallery: (any) => void;
 }
 
 type State = {
@@ -159,9 +165,7 @@ export default class CameraScreen extends Component<Props, State> {
     return (
       !this.props.hideControls && (
         <SafeAreaView style={styles.topButtons}>
-          {this.renderFlashButton()}
           {this.renderSwitchCameraButton()}
-          {this.renderTorchButton()}
         </SafeAreaView>
       )
     );
@@ -235,7 +239,7 @@ export default class CameraScreen extends Component<Props, State> {
             style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', padding: 8 }}
             onPress={() => this.onRatioButtonPressed()}
           >
-            <Text style={styles.ratioText}>{this.state.ratioOverlay}</Text>
+            <Text style={styles.ratioText}>{this.state.ratios[this.state.ratioArrayPosition]}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -333,8 +337,48 @@ export default class CameraScreen extends Component<Props, State> {
         {Platform.OS !== 'android' && this.renderCamera()}
         {this.renderRatioStrip()}
         {Platform.OS === 'android' && <View style={styles.gap} />}
-        {this.renderBottomButtons()}
+        {this.renderMainButtons()}
       </View>
+    );
+  }
+
+  renderMainButtons() {
+    return (
+      !this.props.hideControls && (
+        <SafeAreaView style={styles.mainButtons}>
+          {this.renderGalleryButton()}
+          {this.renderTorchButton()}
+          {this.renderHistoryButton()}
+        </SafeAreaView>
+      )
+    );
+  }
+
+  renderGalleryButton() {
+    return (
+      !this.isCaptureRetakeMode() && (
+        <TouchableOpacity style={{ paddingHorizontal: 25, backgroundColor: palette.blue, borderTopLeftRadius: 50, borderBottomLeftRadius: 50, }} onPress={() => this.props.onGallery()}>
+          <Image
+              style={{ flex: 1, justifyContent: 'center', width: 25, height: 25 }}
+              source={require('../assets/image.png')}
+              resizeMode="contain"
+          />
+        </TouchableOpacity>
+      )
+    );
+  }
+
+  renderHistoryButton() {
+    return (
+      !this.isCaptureRetakeMode() && (
+        <TouchableOpacity style={{ paddingHorizontal: 25, backgroundColor: palette.blue, borderTopRightRadius: 50, borderBottomRightRadius: 50, }} onPress={() => this.props.onHistory()}>
+          <Image
+              style={{ flex: 1, justifyContent: 'center', width: 25, height: 25 }}
+              source={require('../assets/history_tab_active.png')}
+              resizeMode="contain"
+          />
+        </TouchableOpacity>
+      )
     );
   }
 }
@@ -362,9 +406,16 @@ const styles = StyleSheet.create(
     topButtons: {
       flex: 1,
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       paddingTop: 8,
       paddingBottom: 0,
+    },
+    mainButtons: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      paddingTop: 8,
+      paddingBottom: 8,
     },
     cameraContainer: {
       ...Platform.select({
