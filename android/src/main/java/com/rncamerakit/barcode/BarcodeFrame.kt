@@ -40,13 +40,13 @@ class BarcodeFrame(context: Context) : View(context) {
         centerFrameBorderPaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
 
         outsideFramePaint = Paint()
-        outsideFramePaint.color = Color.argb(0.3f,0f,0f,0f)
+        outsideFramePaint.color = Color.argb(0.5f,0f,0f,0f)
         outsideFramePaint.style = Paint.Style.FILL
         outsideFramePaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
 
         //todo add shader https://medium.com/@yuriyskul/different-ways-to-create-glowing-shapes-in-android-canvas-8b73010411fe
         laserPaint.style = Paint.Style.STROKE
-        laserPaint.color = Color.LTGRAY
+        laserPaint.color = Color.CYAN
         laserPaint.strokeWidth = LASER_STROKE_WIDTH.toFloat()
         borderMargin = context.resources.getDimensionPixelSize(R.dimen.border_length)
     }
@@ -57,6 +57,7 @@ class BarcodeFrame(context: Context) : View(context) {
         frameHeight = measuredHeight
         val marginWidth = width / WIDTH_SCALE
         val marginHeight = (height / HEIGHT_SCALE).toInt()
+
         frameRect.left = marginWidth
         frameRect.right = width - marginWidth
         frameRect.top = marginHeight
