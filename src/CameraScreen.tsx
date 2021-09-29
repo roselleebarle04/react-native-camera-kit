@@ -126,7 +126,8 @@ export default class CameraScreen extends Component<Props, State> {
           backgroundColor: palette.blue,
           borderTopLeftRadius: 50,
           borderBottomLeftRadius: 50,
-          alignItems: 'center'
+          alignItems: 'center',
+          paddingVertical: 10,
         }}
         onPress={(e: any) => this.props.onGallery(e)}
         >
@@ -148,7 +149,8 @@ export default class CameraScreen extends Component<Props, State> {
           backgroundColor: palette.blue,
           borderTopRightRadius: 50,
           borderBottomRightRadius: 50,
-          alignItems: 'center'
+          alignItems: 'center',
+          paddingVertical: 10,
         }}
         onPress={(e: any) => this.props.onHistory(e)}
         >
@@ -168,7 +170,8 @@ export default class CameraScreen extends Component<Props, State> {
         <TouchableOpacity style={{
           flex: 1,
           backgroundColor: palette.blue,
-          alignItems: 'center'
+          alignItems: 'center',
+          paddingVertical: 10,
         }}
           onPress={() => this.onSetTorch()}
         >
