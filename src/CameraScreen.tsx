@@ -128,6 +128,7 @@ export default class CameraScreen extends Component<Props, State> {
           borderBottomLeftRadius: 50,
           alignItems: 'center',
           paddingVertical: 10,
+          height: 45
         }}
         onPress={(e: any) => this.props.onGallery(e)}
         >
@@ -151,6 +152,7 @@ export default class CameraScreen extends Component<Props, State> {
           borderBottomRightRadius: 50,
           alignItems: 'center',
           paddingVertical: 10,
+          height: 45
         }}
         onPress={(e: any) => this.props.onHistory(e)}
         >
@@ -172,6 +174,7 @@ export default class CameraScreen extends Component<Props, State> {
           backgroundColor: palette.blue,
           alignItems: 'center',
           paddingVertical: 10,
+          height: 45
         }}
           onPress={() => this.onSetTorch()}
         >
@@ -194,6 +197,7 @@ export default class CameraScreen extends Component<Props, State> {
           paddingVertical: 10,
           backgroundColor: palette.blue,
           borderRadius: 100,
+          height: 45
         }}
         onPress={() => this.onSwitchCameraPressed()}
         >
