@@ -187,7 +187,7 @@ export default class CameraScreen extends Component<Props, State> {
       this.props.cameraFlipImage &&
         !this.isCaptureRetakeMode() && (
         <TouchableOpacity style={{
-          paddingHorizontal: 15,
+          paddingHorizontal: 17,
           paddingVertical: 10,
           backgroundColor: palette.blue,
           borderRadius: 100,
