@@ -122,10 +122,11 @@ export default class CameraScreen extends Component<Props, State> {
     return (
       !this.isCaptureRetakeMode() && (
         <TouchableOpacity style={{
-          paddingHorizontal: 25,
+          flex: 1,
           backgroundColor: palette.blue,
           borderTopLeftRadius: 50,
           borderBottomLeftRadius: 50,
+          alignItems: 'center'
         }}
         onPress={(e: any) => this.props.onGallery(e)}
         >
@@ -143,10 +144,11 @@ export default class CameraScreen extends Component<Props, State> {
     return (
       !this.isCaptureRetakeMode() && (
         <TouchableOpacity style={{
-          paddingHorizontal: 25,
+          flex: 1,
           backgroundColor: palette.blue,
           borderTopRightRadius: 50,
           borderBottomRightRadius: 50,
+          alignItems: 'center'
         }}
         onPress={(e: any) => this.props.onHistory(e)}
         >
@@ -163,7 +165,11 @@ export default class CameraScreen extends Component<Props, State> {
   renderTorchButton() {
     return (
       !this.isCaptureRetakeMode() && (
-        <TouchableOpacity style={{paddingHorizontal: 25, backgroundColor: palette.blue}}
+        <TouchableOpacity style={{
+          flex: 1,
+          backgroundColor: palette.blue,
+          alignItems: 'center'
+        }}
           onPress={() => this.onSetTorch()}
         >
           <Image
@@ -181,7 +187,7 @@ export default class CameraScreen extends Component<Props, State> {
       this.props.cameraFlipImage &&
         !this.isCaptureRetakeMode() && (
         <TouchableOpacity style={{
-          paddingHorizontal: 10,
+          paddingHorizontal: 15,
           paddingVertical: 10,
           backgroundColor: palette.blue,
           borderRadius: 100,
@@ -189,7 +195,7 @@ export default class CameraScreen extends Component<Props, State> {
         onPress={() => this.onSwitchCameraPressed()}
         >
           <Image
-            style={{flex: 1, justifyContent: 'center', width: 32, height: 32}}
+            style={{flex: 1, justifyContent: 'center', width: 30, height: 30}}
             source={this.props.cameraFlipImage}
             resizeMode="contain"
           />
@@ -424,15 +430,14 @@ const styles = StyleSheet.create(
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
-      paddingTop: 8,
-      paddingBottom: 0,
+      marginTop: '10%',
     },
     mainButtons: {
       flex: 1,
       flexDirection: 'row',
-      justifyContent: 'center',
-      paddingTop: 8,
-      paddingBottom: 8,
+      justifyContent: 'space-around',
+      marginHorizontal: '10%',
+      marginBottom: '10%',
     },
     cameraContainer: {
       ...Platform.select({

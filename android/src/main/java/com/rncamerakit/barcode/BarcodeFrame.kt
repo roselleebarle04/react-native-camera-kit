@@ -46,8 +46,9 @@ class BarcodeFrame(context: Context) : View(context) {
 
         //todo add shader https://medium.com/@yuriyskul/different-ways-to-create-glowing-shapes-in-android-canvas-8b73010411fe
         laserPaint.style = Paint.Style.STROKE
-        laserPaint.color = Color.CYAN
+        laserPaint.color = Color.LTGRAY
         laserPaint.strokeWidth = LASER_STROKE_WIDTH.toFloat()
+        laserPaint.setAntiAlias(true);
         borderMargin = context.resources.getDimensionPixelSize(R.dimen.border_length)
     }
 
@@ -87,6 +88,7 @@ class BarcodeFrame(context: Context) : View(context) {
     private fun drawSquare(canvas: Canvas) {
         canvas.drawRect(outsideFrameRect, outsideFramePaint)
         canvas.drawRect(centerFrameRect, centerFramePaint)
+        canvas.drawRect(centerFrameRect, centerFrameBorderPaint)
     }
 
     private fun drawBorder(canvas: Canvas) {
