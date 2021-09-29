@@ -32,7 +32,7 @@ class BarcodeFrame(context: Context) : View(context) {
         centerFramePaint.color = Color.TRANSPARENT
         centerFramePaint.style = Paint.Style.FILL
         centerFramePaint.strokeWidth = MAIN_BORDER_STROKE_WIDTH.toFloat()
-        centerFramePaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        centerFramePaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR))
 
         centerFrameBorderPaint = Paint()
         centerFrameBorderPaint.color = Color.LTGRAY
@@ -48,7 +48,7 @@ class BarcodeFrame(context: Context) : View(context) {
         laserPaint.style = Paint.Style.STROKE
         laserPaint.color = Color.LTGRAY
         laserPaint.strokeWidth = LASER_STROKE_WIDTH.toFloat()
-        laserPaint.setAntiAlias(true);
+        laserPaint.setAntiAlias(true)
         borderMargin = context.resources.getDimensionPixelSize(R.dimen.border_length)
     }
 
@@ -110,7 +110,7 @@ class BarcodeFrame(context: Context) : View(context) {
 
     fun setFrameColor(@ColorInt borderColor: Int) {
         borderPaint.color = borderColor
-        laserPaint.setShadowLayer(30f, 0f, 0f, borderColor);
+        laserPaint.setShadowLayer(20f, 0f, -5f, borderColor)
     }
 
     fun setLaserColor(@ColorInt laserColor: Int) {
@@ -119,7 +119,7 @@ class BarcodeFrame(context: Context) : View(context) {
 
     companion object {
         private const val MAIN_BORDER_STROKE_WIDTH = 2.5
-        private const val LASER_STROKE_WIDTH = 2.5
+        private const val LASER_STROKE_WIDTH = 5
         private const val STROKE_WIDTH = 12
         private const val ANIMATION_SPEED = 4
         private const val WIDTH_SCALE = 7
