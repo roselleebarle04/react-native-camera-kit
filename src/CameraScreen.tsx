@@ -197,7 +197,7 @@ export default class CameraScreen extends Component<Props, State> {
           paddingVertical: 10,
           backgroundColor: palette.blue,
           borderRadius: 100,
-          height: 45
+          height: 64
         }}
         onPress={() => this.onSwitchCameraPressed()}
         >
