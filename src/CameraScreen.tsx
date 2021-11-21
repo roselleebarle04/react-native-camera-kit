@@ -438,12 +438,14 @@ const styles = StyleSheet.create(
       flexDirection: 'row',
       justifyContent: 'center',
       marginTop: '10%',
+      marginBottom: '10%',
     },
     mainButtons: {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-around',
       marginHorizontal: '10%',
+      marginTop: '10%',
       marginBottom: '10%',
     },
     cameraContainer: {
@@ -458,11 +460,6 @@ const styles = StyleSheet.create(
         default: {
           flex: 10,
           flexDirection: 'column',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width,
-          height,
         },
       }),
     },
