@@ -458,6 +458,11 @@ const styles = StyleSheet.create(
         default: {
           flex: 10,
           flexDirection: 'column',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width,
+          height,
         },
       }),
     },
